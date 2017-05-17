@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
+	<xs:element name="customProfile">
+		<xs:annotation>
+			<xs:documentation>Defines the Schema for Custom Services of IPPBX Service. Key to this doc is "entId" (i.e. the tenant id)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="banId" type="xs:anyURI" minOccurs="1" maxOccurs="50"/>
+				<xs:element name="entid" type="xs:string" minOccurs="1" maxOccurs="1"/> <!-- tenant id -->
+				<xs:element name="lines" type="lineinfotype" minOccurs="0" maxOccurs="unbounded"/> <!-- optional lines -->
+				<xs:element name="confAcTuples" type="confAcTuplesType" minOccurs="0" maxOccurs="unbounded"/> <!-- optional conference ac tuples -->
+				<xs:element name="ivrpolicy" type="scheduletype" minOccurs="0" maxOccurs="3"/> <!-- optional ivr policy -->
+				<xs:element name="enterprise_cli" type="xs:string" minOccurs="0" maxOccurs="1"/> <!-- optional calling line identity of enterprise -->
+				<xs:element ref="services"  minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="roles"  minOccurs="0" maxOccurs="1"/>
+				<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="role" type="xs:string"/>
+	<xs:element name="name" type="xs:string"/>
+	<xs:element name="value" type="xs:string"/>
+	<xs:element name="services">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="service" maxOccurs="50"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="roles">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="role" maxOccurs="1"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="control">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="name"/>
+				<xs:element ref="value"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="service">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="control" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="lineinfotype">
+		<xs:sequence>
+			<xs:element name="lineNumber" type="xs:string" maxOccurs="20"/>
+			<xs:element name="shortLineNumber" type="xs:string" maxOccurs="20"/>
+		</xs:sequence>
+		<xs:attribute name="type" type="lineType" use="required"/>
+		<xs:attribute name="tolltype" type="tollType" use="optional"/>
+		<xs:attribute name="usagetype" type="usageType" use="optional"/>
+	</xs:complexType>
+	<xs:simpleType name="lineType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="business"/>
+			<xs:enumeration value="conference"/>
+			<xs:enumeration value="fax"/>
+			<xs:enumeration value="autoattendant"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tollType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="tollfree"/>
+			<xs:enumeration value="toll"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="usageType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="primary"/>
+			<xs:enumeration value="secondary"/>
+			<xs:enumeration value="group"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="confAcTuplesType">
+		<xs:sequence>
+			<xs:element name="mac" type="xs:string"/>
+			<xs:element name="pac" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- defines the Working hours (business hours), Non Working Hours (Out of Hours) for the Business lines -->
+	<xs:complexType name="scheduletype">
+		<xs:sequence>
+			<xs:element name="routine" type="routinetype" maxOccurs="21"/>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="treetype" type="treetype" use="required"/>
+		<xs:attribute name="start-date" type="xs:dateTime"/>
+		<xs:attribute name="end-date" type="xs:dateTime"/>
+		<xs:attribute name="genericroutine" type="xs:boolean" default="false"/>
+		<xs:anyAttribute namespace="##any" processContents="lax"/>
+		<!-- when set to true which implies that this is a default policy if no specific policy is defined for the given time period-->
+	</xs:complexType>
+	<!-- defines begin and end time for each of day -->
+	<xs:complexType name="routinetype">
+		<xs:sequence>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="day" type="daysOfWeek" use="required"/>
+		<xs:attribute name="begin-time" type="xs:time" use="required"/>
+		<xs:attribute name="end-time" type="xs:time" use="required"/>
+		<xs:attribute name="timezone" type="xs:string" use="optional"/>
+		<xs:anyAttribute namespace="##any" processContents="lax"/>
+	</xs:complexType>
+	<!-- defines the days of the week -->
+	<xs:simpleType name="daysOfWeek">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="monday"/>
+			<xs:enumeration value="tuesday"/>
+			<xs:enumeration value="wednesday"/>
+			<xs:enumeration value="thursday"/>
+			<xs:enumeration value="friday"/>
+			<xs:enumeration value="saturday"/>
+			<xs:enumeration value="sunday"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="treetype">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="working"/>
+			<xs:enumeration value="nonworking"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

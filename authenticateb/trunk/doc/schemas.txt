@@ -1,0 +1,424 @@
+https://www.worldtimebuddy.com/pst-to-gmt-converter
+
+1.5 Acronyms
+WSG Web Services Gateway
+IAM Identification and Authentication Management
+B2B Business to Business
+WSDL Web Service Definition Language
+CAS Conference Application Server
+
+255 778 580
+4428
+
+601 819 410
+4012
+
+
+255778580
+4211
+
+
+
+--------------------------------------------------------
+--  File created - Monday-May-01-2017   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Table FBI_ENTERPRISE
+--------------------------------------------------------
+
+  CREATE TABLE "FBI_STG"."FBI_ENTERPRISE" 
+   (	"TENANTID" VARCHAR2(100 CHAR), 
+	"TENANT_REALM" VARCHAR2(100 CHAR), 
+	"ALLOWED_DOMAINS" VARCHAR2(2000 CHAR), 
+	"AUTO_ONBOARDING" VARCHAR2(1 CHAR), 
+	"TENANT_NAME" VARCHAR2(200 CHAR), 
+	"LOCATION" VARCHAR2(1000 CHAR), 
+	"CREATE_DTTM" DATE DEFAULT sysdate, 
+	"CREATED_BY" VARCHAR2(100 CHAR), 
+	"LAST_UPDATED_BY" VARCHAR2(100 CHAR), 
+	"LAST_UPDATE_DTTM" DATE
+   ) ;
+--------------------------------------------------------
+--  DDL for Table FBI_ENTERPRISE_CONTACT
+--------------------------------------------------------
+
+  CREATE TABLE "FBI_STG"."FBI_ENTERPRISE_CONTACT" 
+   (	"TENANTID" VARCHAR2(100 CHAR), 
+	"CONTACT_NAME" VARCHAR2(100 CHAR), 
+	"CONTACT_EMAIL" VARCHAR2(500 BYTE), 
+	"CONTACT_PHONE" NUMBER, 
+	"CONTACT_MOBILE" NUMBER, 
+	"CONTACT_FAX" NUMBER, 
+	"CREATE_DTTM" DATE DEFAULT sysdate, 
+	"CREATED_BY" VARCHAR2(100 CHAR), 
+	"LAST_UPDATED_BY" VARCHAR2(100 CHAR), 
+	"LAST_UPDATE_DTTM" DATE, 
+	"CONTACT_TYPE" VARCHAR2(100 BYTE)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table FBI_ENTERPRISE_RESOURCE_URI
+--------------------------------------------------------
+
+  CREATE TABLE "FBI_STG"."FBI_ENTERPRISE_RESOURCE_URI" 
+   (	"FED_TYPE_ID" NUMBER, 
+	"URI_TYPE_ID" NUMBER, 
+	"URI" VARCHAR2(4000 CHAR), 
+	"CREATE_DTTM" DATE DEFAULT sysdate, 
+	"CREATED_BY" VARCHAR2(100 CHAR), 
+	"LAST_UPDATED_BY" VARCHAR2(100 CHAR), 
+	"LAST_UPDATE_DTTM" DATE, 
+	"TENANTID" VARCHAR2(1000 BYTE)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table FBI_FED_PARTNER_USERID
+--------------------------------------------------------
+
+  CREATE TABLE "FBI_STG"."FBI_FED_PARTNER_USERID" 
+   (	"FED_EMPID" NUMBER, 
+	"FED_TYPE_ID" NUMBER, 
+	"FED_PARTNER_USERID" VARCHAR2(1000 CHAR)
+   ) ;
+--------------------------------------------------------
+--  DDL for Table FBI_FED_TYPE
+--------------------------------------------------------
+
+  CREATE TABLE "FBI_STG"."FBI_FED_TYPE" 
+   (	"FED_TYPE_ID" NUMBER, 
+	"FED_TYPE" VARCHAR2(100 CHAR), 
+	"CREATED_DTTM" DATE DEFAULT sysdate, 
+	"CREATED_BY" VARCHAR2(100 CHAR), 
+	"LAST_UPDATED_BY" VARCHAR2(100 CHAR), 
+	"LAST_UPDATE_DTTM" DATE
+   ) ;
+--------------------------------------------------------
+--  DDL for Table FBI_FEDERATED_CLIENT_ID
+--------------------------------------------------------
+
+  CREATE TABLE "FBI_STG"."FBI_FEDERATED_CLIENT_ID" 
+   (	"TENANTID" VARCHAR2(100 CHAR), 
+	"CLIENT_ID" VARCHAR2(100 CHAR), 
+	"CLIENT_SECRET" VARCHAR2(100 CHAR), 
+	"SCOPES" VARCHAR2(4000 CHAR), 
+	"REDIRECT_URI" VARCHAR2(4000 CHAR), 
+	"CLAIMS" VARCHAR2(2000 CHAR), 
+	"CERTIFICATE" CLOB, 
+	"CREATE_DTTM" DATE DEFAULT sysdate, 
+	"CREATED_BY" VARCHAR2(100 CHAR), 
+	"LAST_UPDATED_BY" VARCHAR2(100 CHAR), 
+	"LAST_UPDATE_DTTM" DATE, 
+	"FED_TYPE_ID" NUMBER
+   ) ;
+--------------------------------------------------------
+--  DDL for Table FBI_FEDERATED_USER_DATA
+--------------------------------------------------------
+
+  CREATE TABLE "FBI_STG"."FBI_FEDERATED_USER_DATA" 
+   (	"FED_EMP_ID" NUMBER, 
+	"FED_TYPE_ID" NUMBER, 
+	"CLIENT_ID" VARCHAR2(100 CHAR), 
+	"SCOPES" VARCHAR2(4000 CHAR), 
+IdeConnections%2523FBI_STG//FBI_STG/TABLE	"REDIRECT_URI" VARCHAR2(4000 CHAR), 
+	"CLAIMS" VARCHAR2(4000 CHAR), 
+	"ACCESS_TOKEN" VARCHAR2(1000 CHAR), 
+	"ACCESS_TOKEN_EXPIRY" TIMESTAMP (6), 
+	"REFRESH_TOKEN" VARCHAR2(1000 CHAR), 
+	"ID_TOKEN" VARCHAR2(4000 CHAR), 
+	"SAML_TOKEN" VARCHAR2(1000 CHAR), 
+	"LDAP_DN" VARCHAR2(1000 CHAR), 
+	"CREATE_DTTM" DATE DEFAULT sysdate, 
+	"CREATED_BY" VARCHAR2(100 CHAR), 
+	"LAST_UPDATED_BY" VARCHAR2(100 CHAR), 
+	"LAST_UPDATE_DTTM" DATE
+   ) ;
+--------------------------------------------------------
+--  DDL for Table FBI_FEDERATED_USERID
+--------------------------------------------------------
+
+  CREATE TABLE "FBI_STG"."FBI_FEDERATED_USERID" 
+   (	"FED_EMAIL" VARCHAR2(500 CHAR), 
+	"IAM_USERID" VARCHAR2(100 CHAR), 
+	"TENANTID" VARCHAR2(100 CHAR), 
+	"STATUS" VARCHAR2(50 CHAR), 
+	"CREATE_DTTM" DATE DEFAULT sysdate, 
+	"CREATED_BY" VARCHAR2(100 CHAR), 
+	"LAST_UPDATED_BY" VARCHAR2(100 CHAR), 
+	"LAST_UPDATE_DTTM" DATE, 
+	"FED_EMP_ID" NUMBER
+   ) ;
+--------------------------------------------------------
+--  DDL for Table FBI_PORTAL_USER
+--------------------------------------------------------
+
+  CREATE TABLE "FBI_STG"."FBI_PORTAL_USER" 
+   (	"USERNAME" VARCHAR2(100 CHAR), 
+	"CREATE_DTTM" DATE DEFAULT sysdate, 
+	"CREATED_BY" VARCHAR2(100 CHAR), 
+	"LAST_UPDATED_BY" VARCHAR2(100 CHAR), 
+	"LAST_UPDATE_DTTM" DATE
+   ) ;
+--------------------------------------------------------
+--  DDL for Table FBI_TENANT_FED_TYPE
+--------------------------------------------------------
+
+  CREATE TABLE "FBI_STG"."FBI_TENANT_FED_TYPE" 
+   (	"TENANTID" VARCHAR2(100 CHAR), 
+	"FED_TYPE_ID" NUMBER
+   ) ;
+--------------------------------------------------------
+--  DDL for Table FBI_URI_TYPE
+--------------------------------------------------------
+
+  CREATE TABLE "FBI_STG"."FBI_URI_TYPE" 
+   (	"URI_TYPE_ID" NUMBER, 
+	"URI_TYPE" VARCHAR2(100 CHAR), 
+	"CREATE_DTTM" DATE DEFAULT sysdate, 
+	"CREATED_BY" VARCHAR2(100 CHAR), 
+	"LAST_UPDATED_BY" VARCHAR2(100 CHAR), 
+	"LAST_UPDATE_DTTM" DATE
+   ) ;
+--------------------------------------------------------
+--  DDL for Index FBI_ENTERPRISE_IDX1
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "FBI_STG"."FBI_ENTERPRISE_IDX1" ON "FBI_STG"."FBI_ENTERPRISE" ("TENANTID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index FBI_ENTERPRISE_RESOURCE_U_UK1
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "FBI_STG"."FBI_ENTERPRISE_RESOURCE_U_UK1" ON "FBI_STG"."FBI_ENTERPRISE_RESOURCE_URI" ("FED_TYPE_ID", "URI_TYPE_ID", "TENANTID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index FBI_ENTERPRISE_RESOURCE_IDX1
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "FBI_STG"."FBI_ENTERPRISE_RESOURCE_IDX1" ON "FBI_STG"."FBI_ENTERPRISE_RESOURCE_URI" ("FED_TYPE_ID", "URI_TYPE_ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index FBI_FED_TYPE_IDX2
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "FBI_STG"."FBI_FED_TYPE_IDX2" ON "FBI_STG"."FBI_FED_TYPE" ("FED_TYPE_ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index FBI_FED_TYPE_FT_IDX1
+--------------------------------------------------------
+
+  CREATE INDEX "FBI_STG"."FBI_FED_TYPE_FT_IDX1" ON "FBI_STG"."FBI_FED_TYPE" ("FED_TYPE") 
+  ;
+--------------------------------------------------------
+--  DDL for Index FBI_FEDERATED_USER_DATA_INDEX1
+--------------------------------------------------------
+
+  CREATE INDEX "FBI_STG"."FBI_FEDERATED_USER_DATA_INDEX1" ON "FBI_STG"."FBI_FEDERATED_USER_DATA" ("FED_EMP_ID" DESC) 
+  ;
+--------------------------------------------------------
+--  DDL for Index FBI_FEDERATED_USERID_IDX1
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "FBI_STG"."FBI_FEDERATED_USERID_IDX1" ON "FBI_STG"."FBI_FEDERATED_USERID" ("FED_EMAIL", "TENANTID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index FBI_FEDERATED_USERID_PK1
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "FBI_STG"."FBI_FEDERATED_USERID_PK1" ON "FBI_STG"."FBI_FEDERATED_USERID" ("IAM_USERID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index FBI_FEDERATED_USERID_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "FBI_STG"."FBI_FEDERATED_USERID_PK" ON "FBI_STG"."FBI_FEDERATED_USERID" ("FED_EMP_ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index FBI_URI_TYPE_IDX1
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "FBI_STG"."FBI_URI_TYPE_IDX1" ON "FBI_STG"."FBI_URI_TYPE" ("URI_TYPE_ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index FBI_URI_TYPE_IDX2
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "FBI_STG"."FBI_URI_TYPE_IDX2" ON "FBI_STG"."FBI_URI_TYPE" ("URI_TYPE") 
+  ;
+--------------------------------------------------------
+--  Constraints for Table FBI_ENTERPRISE
+--------------------------------------------------------
+
+  ALTER TABLE "FBI_STG"."FBI_ENTERPRISE" MODIFY ("CREATED_BY" NOT NULL ENABLE);
+  ALTER TABLE "FBI_STG"."FBI_ENTERPRISE" MODIFY ("TENANTID" NOT NULL ENABLE);
+  ALTER TABLE "FBI_STG"."FBI_ENTERPRISE" ADD CONSTRAINT "FBI_ENTERPRISE_PK" PRIMARY KEY ("TENANTID")
+  USING INDEX (CREATE UNIQUE INDEX "FBI_STG"."FBI_ENTERPRISE_IDX1" ON "FBI_STG"."FBI_ENTERPRISE" ("TENANTID") 
+  )  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table FBI_ENTERPRISE_CONTACT
+--------------------------------------------------------
+
+  ALTER TABLE "FBI_STG"."FBI_ENTERPRISE_CONTACT" MODIFY ("CREATED_BY" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table FBI_ENTERPRISE_RESOURCE_URI
+--------------------------------------------------------
+
+  ALTER TABLE "FBI_STG"."FBI_ENTERPRISE_RESOURCE_URI" ADD CONSTRAINT "FBI_ENTERPRISE_RESOURCE_U_UK1" UNIQUE ("FED_TYPE_ID", "URI_TYPE_ID", "TENANTID")
+  USING INDEX  ENABLE;
+  ALTER TABLE "FBI_STG"."FBI_ENTERPRISE_RESOURCE_URI" MODIFY ("CREATED_BY" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table FBI_FED_TYPE
+--------------------------------------------------------
+
+  ALTER TABLE "FBI_STG"."FBI_FED_TYPE" MODIFY ("CREATED_BY" NOT NULL ENABLE);
+  ALTER TABLE "FBI_STG"."FBI_FED_TYPE" MODIFY ("FED_TYPE" NOT NULL ENABLE);
+  ALTER TABLE "FBI_STG"."FBI_FED_TYPE" MODIFY ("FED_TYPE_ID" NOT NULL ENABLE);
+  ALTER TABLE "FBI_STG"."FBI_FED_TYPE" ADD CONSTRAINT "FBI_FED_TYPE_UK1" UNIQUE ("FED_TYPE")
+  USING INDEX (CREATE INDEX "FBI_STG"."FBI_FED_TYPE_FT_IDX1" ON "FBI_STG"."FBI_FED_TYPE" ("FED_TYPE") 
+  )  ENABLE;
+  ALTER TABLE "FBI_STG"."FBI_FED_TYPE" ADD CONSTRAINT "FBI_FED_TYPE_PK" PRIMARY KEY ("FED_TYPE_ID")
+  USING INDEX (CREATE UNIQUE INDEX "FBI_STG"."FBI_FED_TYPE_IDX2" ON "FBI_STG"."FBI_FED_TYPE" ("FED_TYPE_ID") 
+  )  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table FBI_FEDERATED_CLIENT_ID
+--------------------------------------------------------
+
+  ALTER TABLE "FBI_STG"."FBI_FEDERATED_CLIENT_ID" MODIFY ("CREATED_BY" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table FBI_FEDERATED_USER_DATA
+--------------------------------------------------------
+
+  ALTER TABLE "FBI_STG"."FBI_FEDERATED_USER_DATA" MODIFY ("FED_EMP_ID" NOT NULL ENABLE);
+  ALTER TABLE "FBI_STG"."FBI_FEDERATED_USER_DATA" MODIFY ("CREATED_BY" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table FBI_FEDERATED_USERID
+--------------------------------------------------------
+
+  ALTER TABLE "FBI_STG"."FBI_FEDERATED_USERID" ADD CONSTRAINT "FBI_FEDERATED_USERID_PK" PRIMARY KEY ("FED_EMP_ID")
+  USING INDEX  ENABLE;
+  ALTER TABLE "FBI_STG"."FBI_FEDERATED_USERID" MODIFY ("FED_EMP_ID" NOT NULL ENABLE);
+  ALTER TABLE "FBI_STG"."FBI_FEDERATED_USERID" MODIFY ("IAM_USERID" NOT NULL ENABLE);
+  ALTER TABLE "FBI_STG"."FBI_FEDERATED_USERID" MODIFY ("CREATED_BY" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table FBI_PORTAL_USER
+--------------------------------------------------------
+
+  ALTER TABLE "FBI_STG"."FBI_PORTAL_USER" MODIFY ("CREATED_BY" NOT NULL ENABLE);
+  ALTER TABLE "FBI_STG"."FBI_PORTAL_USER" MODIFY ("USERNAME" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table FBI_URI_TYPE
+--------------------------------------------------------
+
+  ALTER TABLE "FBI_STG"."FBI_URI_TYPE" MODIFY ("CREATED_BY" NOT NULL ENABLE);
+  ALTER TABLE "FBI_STG"."FBI_URI_TYPE" MODIFY ("URI_TYPE_ID" NOT NULL ENABLE);
+  ALTER TABLE "FBI_STG"."FBI_URI_TYPE" ADD CONSTRAINT "FBI_URI_TYPE_UK1" UNIQUE ("URI_TYPE")
+  USING INDEX (CREATE UNIQUE INDEX "FBI_STG"."FBI_URI_TYPE_IDX2" ON "FBI_STG"."FBI_URI_TYPE" ("URI_TYPE") 
+  )  ENABLE;
+  ALTER TABLE "FBI_STG"."FBI_URI_TYPE" ADD CONSTRAINT "FBI_URI_TYPE_PK" PRIMARY KEY ("URI_TYPE_ID")
+  USING INDEX (CREATE UNIQUE INDEX "FBI_STG"."FBI_URI_TYPE_IDX1" ON "FBI_STG"."FBI_URI_TYPE" ("URI_TYPE_ID") 
+  )  ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table FBI_ENTERPRISE_CONTACT
+--------------------------------------------------------
+
+  ALTER TABLE "FBI_STG"."FBI_ENTERPRISE_CONTACT" ADD CONSTRAINT "FBI_ENTERPRISE_CONTACT_FK1" FOREIGN KEY ("TENANTID")
+	  REFERENCES "FBI_STG"."FBI_ENTERPRISE" ("TENANTID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table FBI_ENTERPRISE_RESOURCE_URI
+--------------------------------------------------------
+
+  ALTER TABLE "FBI_STG"."FBI_ENTERPRISE_RESOURCE_URI" ADD CONSTRAINT "FBI_ENTERPRISE_RESOURCE_U_FK1" FOREIGN KEY ("FED_TYPE_ID")
+	  REFERENCES "FBI_STG"."FBI_FED_TYPE" ("FED_TYPE_ID") ENABLE;
+  ALTER TABLE "FBI_STG"."FBI_ENTERPRISE_RESOURCE_URI" ADD CONSTRAINT "FBI_ENTERPRISE_RESOURCE_U_FK2" FOREIGN KEY ("URI_TYPE_ID")
+	  REFERENCES "FBI_STG"."FBI_URI_TYPE" ("URI_TYPE_ID") ENABLE;
+  ALTER TABLE "FBI_STG"."FBI_ENTERPRISE_RESOURCE_URI" ADD CONSTRAINT "FBI_ENTERPRISE_RESOURCE_U_FK3" FOREIGN KEY ("TENANTID")
+	  REFERENCES "FBI_STG"."FBI_ENTERPRISE" ("TENANTID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table FBI_FED_PARTNER_USERID
+--------------------------------------------------------
+
+  ALTER TABLE "FBI_STG"."FBI_FED_PARTNER_USERID" ADD CONSTRAINT "FBI_FED_PARTNER_USERID_FK1" FOREIGN KEY ("FED_EMPID")
+	  REFERENCES "FBI_STG"."FBI_FEDERATED_USERID" ("FED_EMP_ID") ENABLE;
+  ALTER TABLE "FBI_STG"."FBI_FED_PARTNER_USERID" ADD CONSTRAINT "FBI_FED_PARTNER_USERID_FK2" FOREIGN KEY ("FED_TYPE_ID")
+	  REFERENCES "FBI_STG"."FBI_FED_TYPE" ("FED_TYPE_ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table FBI_FEDERATED_CLIENT_ID
+--------------------------------------------------------
+
+  ALTER TABLE "FBI_STG"."FBI_FEDERATED_CLIENT_ID" ADD CONSTRAINT "FBI_FEDERATED_CLIENT_ID_FK1" FOREIGN KEY ("TENANTID")
+	  REFERENCES "FBI_STG"."FBI_ENTERPRISE" ("TENANTID") ENABLE;
+  ALTER TABLE "FBI_STG"."FBI_FEDERATED_CLIENT_ID" ADD CONSTRAINT "FBI_FEDERATED_CLIENT_ID_FK2" FOREIGN KEY ("FED_TYPE_ID")
+	  REFERENCES "FBI_STG"."FBI_FED_TYPE" ("FED_TYPE_ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table FBI_FEDERATED_USER_DATA
+--------------------------------------------------------
+
+  ALTER TABLE "FBI_STG"."FBI_FEDERATED_USER_DATA" ADD CONSTRAINT "FBI_FEDERATED_USER_DATA_FK1" FOREIGN KEY ("FED_EMP_ID")
+	  REFERENCES "FBI_STG"."FBI_FEDERATED_USERID" ("FED_EMP_ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table FBI_FEDERATED_USERID
+--------------------------------------------------------
+
+  ALTER TABLE "FBI_STG"."FBI_FEDERATED_USERID" ADD CONSTRAINT "FBI_FEDERATED_USERID_FK2" FOREIGN KEY ("TENANTID")
+	  REFERENCES "FBI_STG"."FBI_ENTERPRISE" ("TENANTID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table FBI_TENANT_FED_TYPE
+--------------------------------------------------------
+
+  ALTER TABLE "FBI_STG"."FBI_TENANT_FED_TYPE" ADD CONSTRAINT "FBI_TENANT_FED_TYPE_FK1" FOREIGN KEY ("TENANTID")
+	  REFERENCES "FBI_STG"."FBI_ENTERPRISE" ("TENANTID") ENABLE;
+  ALTER TABLE "FBI_STG"."FBI_TENANT_FED_TYPE" ADD CONSTRAINT "FBI_TENANT_FED_TYPE_FK2" FOREIGN KEY ("FED_TYPE_ID")
+	  REFERENCES "FBI_STG"."FBI_FED_TYPE" ("FED_TYPE_ID") ENABLE;
+
+
+
+
+Insert into FBI_FEDERATED_USERID (FED_EMAIL,IAM_USERID,TENANTID,STATUS,CREATE_DTTM,CREATED_BY,LAST_UPDATED_BY,LAST_UPDATE_DTTM,FED_EMP_ID)
+values ('email@mobile.com','U-82bf6ba6-88f5-4049-b86c-860dca0c9fb3','xyz123','ACTIVE',to_date('11-MAY-17','DD-MON-RR'),'admin',null,null,123456);
+
+
+Insert into FBI_FED_PARTNER_USERID (FED_EMPID,FED_TYPE_ID,FED_PARTNER_USERID) values (123456,123,'nwekiunfwku.2342.t43c:43d2');
+f
+sasdffdsa
+
+asdf
+a
+sdfs
+adf
+asdf
+asdf
+
+fds
+
+
+
+
+http://10.182.41.65:8080/ucc/documentManagement/v1/userProfile/users/U-UCCUID1@ucc1.com
+
+<!--Sample XML file generated by XMLSpy v2014 rel. 2 (x64) (http://www.altova.com)-->
+<user-profiles xmlns="urn:oma:xml:cab:pcc" xmlns:n1="urn:oma:xml:xdm:user-profile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:n2="http://www.altova.com/samplexml/other-namespace" xsi:schemaLocation="urn:oma:xml:xdm:user-profile cdb_userProfile_extended_v9_ucc.xsd">
+ <keyList>
+  <listItem>
+   <entryUri>U-UCCUID1@ucc1.com</entryUri>
+  </listItem>
+ </keyList>
+<entid>U-UCCUID1@ucc1.com</entid>
+<domain>ucc1.com</domain>
+ <banid>12345676890</banid>
+ <user-profile uri="http://www.altova.com/">
+  <display-name xml:lang="en-us">UCC USER1</display-name>
+  <name xml:lang="en-us">
+   <given-name>UCC</given-name>
+   <family-name>USER1</family-name>
+   <name-prefix>Mr</name-prefix>
+  </name>
+ </user-profile>
+ <lineInfo>
+  <lineType>GSM</lineType>
+  <msisdn>1234567890</msisdn>
+ </lineInfo>
+ <roles>
+  <role>SuperAdmin</role>
+ </roles>
+ <administeredBans>
+  <banid>12345676890</banid>
+  <banid>RegularUser</banid>
+ </administeredBans> 
+</user-profiles>
