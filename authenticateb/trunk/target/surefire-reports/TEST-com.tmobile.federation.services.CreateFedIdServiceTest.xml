@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="com.tmobile.federation.services.CreateFedIdServiceTest" time="4.033" errors="0" skipped="0">
+<testsuite tests="2" failures="0" name="com.tmobile.federation.services.CreateFedIdServiceTest" time="3.559" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="c:\Program Files\Java\jdk1.8.0_91\jre\bin"/>
     <property name="java.vm.version" value="25.91-b14"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
-    <property name="maven.multiModuleProjectDirectory" value="F:\Workspace\UpWork\authenticateb\trunk"/>
+    <property name="maven.multiModuleProjectDirectory" value="F:\Workspace\ReWork\authenticateb\trunk"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=";"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -16,7 +16,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="F:\Workspace\UpWork\authenticateb\trunk"/>
+    <property name="user.dir" value="F:\Workspace\ReWork\authenticateb\trunk"/>
     <property name="java.runtime.version" value="1.8.0_91-b14"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="c:\Program Files\Java\jdk1.8.0_91\jre\lib\endorsed"/>
@@ -63,5 +63,6 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.tmobile.federation.services.CreateFedIdServiceTest" name="testGetFedIDService" time="4.033"/>
+  <testcase classname="com.tmobile.federation.services.CreateFedIdServiceTest" name="queryFederatedIDFromWebLogic" time="1.767"/>
+  <testcase classname="com.tmobile.federation.services.CreateFedIdServiceTest" name="testGetFedIDService" time="1.792"/>
 </testsuite>
