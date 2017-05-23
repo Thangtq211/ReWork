@@ -113,15 +113,14 @@ create or replace PROCEDURE fbi_stg_user_fed_id (
    p_user_id      IN       fbi_federated_userid.iam_userid%TYPE,
     p_email        IN       fbi_federated_userid.fed_email%TYPE,
      p_tenant_id    IN       fbi_enterprise.tenantid%TYPE,
-     --v_user_federated_id  OUT fbi_fed_partner_userid.fed_partner_userid%Type,
       p_message      OUT      VARCHAR2)
       IS
       v_fed_empid       fbi_fed_partner_userid.fed_empid%Type;
        v_userid_count        NUMBER;
-      v_tenant_count        NUMBER;
-      
+
+
       user_not_exists       EXCEPTION;
-      tenant_not_found      EXCEPTION;
+
       maxuid_exceeded       EXCEPTION;
       BEGIN
 
@@ -133,18 +132,12 @@ create or replace PROCEDURE fbi_stg_user_fed_id (
 
    IF nvl(v_userid_count,0) <> 1   THEN      RAISE user_not_exists;   END IF;
 
-   --CHECKING Tenant Exists Or Not
-    SELECT COUNT (1)
-    INTO v_tenant_count
-     FROM FBI_FEDERATED_USERID
-     WHERE UPPER (TENANTID) = UPPER (p_tenant_id);   IF nvl(v_tenant_count,0) <> 1
-     THEN      RAISE tenant_not_found;   END IF;
 
      SELECT FED_EMP_ID
   INTO v_fed_empid
   FROM FBI_FEDERATED_USERID
   WHERE (UPPER (IAM_USERID) = UPPER (p_user_id) OR UPPER (FED_EMAIL) = UPPER (p_email));
-  
+
   --GETTING USER FEDERATED ID
      SELECT FED_PARTNER_USERID
      INTO p_message
@@ -153,7 +146,7 @@ create or replace PROCEDURE fbi_stg_user_fed_id (
 
      EXCEPTION
      WHEN user_not_exists   THEN      p_message := 'USER';
-     WHEN tenant_not_found   THEN      p_message := 'TENANT';
+
      WHEN OTHERS   THEN      p_message := 'The error is :' || SUBSTR (SQLERRM, 1, 150);
 
      END;
