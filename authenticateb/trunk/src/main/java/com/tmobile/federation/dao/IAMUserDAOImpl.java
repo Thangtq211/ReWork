@@ -50,6 +50,7 @@ public class IAMUserDAOImpl implements IAMUserDAO {
         }
         return null;
     }
+
     /**
      * @param iamUserId
      * @param email
@@ -126,8 +127,6 @@ public class IAMUserDAOImpl implements IAMUserDAO {
         return tenantRealm;
     }
 
-
-
     private void checkAndReTryConnection() {
         boolean isValidConnection = false;
         if (databaseConnection != null) {
@@ -148,8 +147,18 @@ public class IAMUserDAOImpl implements IAMUserDAO {
                 }
             }
         }
-        if(!isValidConnection)
+        if (!isValidConnection) {
+            if (this.databaseConnection != null) {
+                try {
+                    this.databaseConnection.close();
+                } catch (Exception e) {
+                }
+                ;
+                this.databaseConnection = null;
+
+            }
             this.databaseConnection = DatabaseConfig.getDataConnection();
+        }
     }
 
 }

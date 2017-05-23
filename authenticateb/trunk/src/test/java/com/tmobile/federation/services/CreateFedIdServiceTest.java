@@ -29,8 +29,11 @@ import javax.inject.Inject;
 
 import java.util.Arrays;
 
+import static com.jayway.jsonpath.matchers.JsonPathMatchers.hasJsonPath;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -86,6 +89,11 @@ public class CreateFedIdServiceTest {
         String responseBody = responseEntity.getBody();
         System.out.println("responseEntity UserProfiles from Server .... \n" + responseBody);
         assertThat(responseEntity.getStatusCode(), equalTo(HttpStatus.OK));
+        assertThat(responseBody,containsString("role"));
+        assertThat(responseBody,
+          hasJsonPath("role", containsString("SuperAdmin")));
     }
+
+
 
 }

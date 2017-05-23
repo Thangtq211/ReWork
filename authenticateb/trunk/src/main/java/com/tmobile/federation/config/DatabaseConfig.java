@@ -23,7 +23,10 @@ public class DatabaseConfig {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection connection = null;
             logger.info("DBUrl:"+FederationAppConfig.getDbUrl() + " user:"+FederationAppConfig.getDbUser());
+            DriverManager.setLoginTimeout(10);
             connection = DriverManager.getConnection(FederationAppConfig.getDbUrl(), FederationAppConfig.getDbUser(), FederationAppConfig.getDbPwd());
+
+
             return connection;
         } catch (ClassNotFoundException | SQLException e) {
             // TODO Auto-generated catch block
